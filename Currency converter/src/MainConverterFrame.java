@@ -101,7 +101,7 @@ public class MainConverterFrame extends JFrame implements ActionListener{
 				resultsLabel.setText("Izabrali ste KUNE u " + comboBox_2.getSelectedItem());
 				break;
 			default: resultsLabel.setText("ERROR!!");
-	
+			//Label radi probleme
 			}
 		}
 		
