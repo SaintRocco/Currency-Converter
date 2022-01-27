@@ -13,6 +13,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
+import javax.swing.JButton;
+import java.awt.Font;
 
 public class MainConverterFrame extends JFrame implements ActionListener{
 
@@ -20,6 +22,9 @@ public class MainConverterFrame extends JFrame implements ActionListener{
 	private JTextField txtEnterAmount;
 	private JComboBox<?> comboBox_1;
 	private JComboBox<?> comboBox_2;
+	private JButton ConvertButton;
+	private int storeAmount;
+	private JLabel resultsLabel;
 	String[] currencies = { "EUR", "USD", "HRK" }; //JCB Content
 
 	/**
@@ -42,6 +47,7 @@ public class MainConverterFrame extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public MainConverterFrame() {
+		setResizable(false);
 		setTitle("Currency Converter");
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,29 +85,62 @@ public class MainConverterFrame extends JFrame implements ActionListener{
 		comboBox_2.setBounds(306, 113, 86, 20);
 		comboBox_2.addActionListener(this);
 		contentPane.add(comboBox_2);
-	
+		
+		ConvertButton = new JButton("Convert");
+		ConvertButton.setBounds(197, 155, 89, 42);
+		contentPane.add(ConvertButton);
+		
+		ConvertButton.addActionListener(this);
+		
+		resultsLabel = new JLabel();
+		resultsLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		resultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		resultsLabel.setBounds(165, 228, 143, 34);
+		contentPane.add(resultsLabel);
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == comboBox_1) {
-			JLabel resultsLabel = new JLabel();
-			resultsLabel.setBounds(115, 188, 174, 64);
-			contentPane.add(resultsLabel);
+		double ConvHRK = 0;
+		double ConvUSD = 0;
+		double ConvEUR = 0;
+		
+		if (e.getSource() == ConvertButton) {
+			
+			storeAmount = Integer.parseInt(txtEnterAmount.getText());
 			
 			String lblmsg = (String) comboBox_1.getSelectedItem();
 			switch(lblmsg) {
 			case "EUR": 
-				resultsLabel.setText("Izabrali ste EVRE u " + comboBox_2.getSelectedItem());
+				if(comboBox_2.getSelectedItem() == "USD") {	
+					ConvEUR = storeAmount * 1.1; 
+					}
+				else if(comboBox_2.getSelectedItem() == "HRK") {
+					ConvEUR = storeAmount * 7.53;
+				}
+				resultsLabel.setText(String.valueOf(ConvEUR) + comboBox_2.getSelectedItem());
 				break;
 			case "USD": 
-				resultsLabel.setText("Izabrali ste DOLARE u " + comboBox_2.getSelectedItem());
+				if(comboBox_2.getSelectedItem() == "EUR") {	
+					ConvUSD = storeAmount * 0.9; 
+					}
+				else if(comboBox_2.getSelectedItem() == "HRK") {
+					ConvUSD = storeAmount * 6.76;
+				}
+				resultsLabel.setText(String.valueOf(ConvUSD) + comboBox_2.getSelectedItem());
 				break;
 			case "HRK":
-				resultsLabel.setText("Izabrali ste KUNE u " + comboBox_2.getSelectedItem());
+				if(comboBox_2.getSelectedItem() == "EUR") {	
+					ConvHRK = storeAmount * 0.13; 
+					}
+				else if(comboBox_2.getSelectedItem() == "USD") {
+					ConvHRK = storeAmount * 0.15;
+				}
+				resultsLabel.setText(String.valueOf(ConvHRK) + comboBox_2.getSelectedItem());
 				break;
 			default: resultsLabel.setText("ERROR!!");
-			//Label radi probleme
+	
 			}
 		}
 		
