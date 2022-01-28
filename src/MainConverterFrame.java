@@ -112,7 +112,7 @@ public class MainConverterFrame extends JFrame implements ActionListener{
 			
 			String lblmsg = (String) comboBox_1.getSelectedItem();
 			switch(lblmsg) {
-			case "EUR": 
+			case "EUR":  //Euri
 				if(comboBox_2.getSelectedItem() == "USD") {	
 					ConvEUR = storeAmount * 1.1; 
 					}
@@ -121,7 +121,7 @@ public class MainConverterFrame extends JFrame implements ActionListener{
 				}
 				resultsLabel.setText(String.valueOf(ConvEUR) + comboBox_2.getSelectedItem());
 				break;
-			case "USD": 
+			case "USD": //Dolari
 				if(comboBox_2.getSelectedItem() == "EUR") {	
 					ConvUSD = storeAmount * 0.9; 
 					}
@@ -130,14 +130,14 @@ public class MainConverterFrame extends JFrame implements ActionListener{
 				}
 				resultsLabel.setText(String.valueOf(ConvUSD) + comboBox_2.getSelectedItem());
 				break;
-			case "HRK":
+			case "HRK": //Kune
 				if(comboBox_2.getSelectedItem() == "EUR") {	
 					ConvHRK = storeAmount * 0.13; 
 					}
 				else if(comboBox_2.getSelectedItem() == "USD") {
 					ConvHRK = storeAmount * 0.15;
 				}
-				resultsLabel.setText(String.valueOf(ConvHRK) + comboBox_2.getSelectedItem());
+				resultsLabel.setText(String.valueOf(ConvHRK) + comboBox_2.getSelectedItem()); 
 				break;
 			default: resultsLabel.setText("ERROR!!");
 	
